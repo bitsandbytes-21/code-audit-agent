@@ -7,38 +7,6 @@ Built with LangChain, Google Gemini, AstraDB, and FastAPI.
 ## Architecture
 
 ```
-┌──────────────────────────────────────────────────────────────────────┐
-│                         FastAPI Application                         │
-│                                                                      │
-│   ┌──────────────┐  ┌────────────────┐  ┌────────────────────────┐  │
-│   │  Middleware   │  │   API Routes   │  │   Static Frontend      │  │
-│   │  - Rate Limit│  │  /api/chat     │  │   index.html           │  │
-│   │  - Auth      │  │  /api/load-repo│  │   (Dark theme chat UI) │  │
-│   └──────┬───────┘  │  /api/auth     │  └────────────────────────┘  │
-│          │          │  /api/health   │                               │
-│          │          └───────┬────────┘                               │
-│          │                  │                                        │
-│   ┌──────┴──────────────────┴────────────────────────────────────┐  │
-│   │                    LangChain Agent (Gemini 1.5)              │  │
-│   │                                                              │  │
-│   │   Tools:                                                     │  │
-│   │   ┌─────────────┐ ┌──────────────┐ ┌──────────────────────┐ │  │
-│   │   │ repo_search │ │   static     │ │  code_quality_check  │ │  │
-│   │   │ (RAG)       │ │   analysis   │ │  (custom rules)      │ │  │
-│   │   └──────┬──────┘ │   (Bandit)   │ └──────────────────────┘ │  │
-│   │          │        └──────────────┘                           │  │
-│   │   ┌──────┴──────┐ ┌──────────────┐                          │  │
-│   │   │  AstraDB    │ │  save_note / │                          │  │
-│   │   │  Vector     │ │  get_notes   │                          │  │
-│   │   │  Store      │ └──────────────┘                          │  │
-│   │   └─────────────┘                                            │  │
-│   └──────────────────────────────────────────────────────────────┘  │
-│                                                                      │
-│   ┌──────────────────────────────────────────────────────────────┐  │
-│   │                    GitHub API Client                         │  │
-│   │   fetch_issues() │ fetch_pull_requests() │ fetch_code_files()│  │
-│   └──────────────────────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Project Structure
@@ -147,23 +115,7 @@ python app.py
 pytest tests/ -v
 ```
 
-### Deploy to Render
-
-1. Push to GitHub
-2. Go to [render.com](https://render.com) → New → Web Service
-3. Connect your repo — Render auto-detects `render.yaml`
-4. Add environment variables in the dashboard
-5. Deploy
-
-## API Endpoints
-
-| Method | Endpoint         | Description                    |
-| ------ | ---------------- | ------------------------------ |
-| GET    | `/`              | Serve frontend UI              |
-| GET    | `/api/health`    | Health check + current state   |
-| POST   | `/api/auth`      | Authenticate (if enabled)      |
-| POST   | `/api/load-repo` | Load a GitHub repo for audit   |
-| POST   | `/api/chat`      | Send message to audit agent    |
+or find it in: https://code-audit-agent.onrender.com|
 
 ## Usage Examples
 
