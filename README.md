@@ -115,7 +115,7 @@ python app.py
 pytest tests/ -v
 ```
 
-or find it in: https://code-audit-agent.onrender.com|
+or find it in: https://code-audit-agent.onrender.com
 
 ## Usage Examples
 
