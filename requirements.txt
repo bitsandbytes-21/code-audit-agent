@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+requests
+langchain
+langchain-community
+langchain-core
+langchain-google-genai
+langchain-astradb
+google-generativeai
+faiss-cpu
+bandit
+
+# Testing
+pytest
